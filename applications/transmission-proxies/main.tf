@@ -12,10 +12,10 @@ module "movies_proxy" {
 
   proxies = [
     {
-      upstream = "transmission_movies"
-      path     = "/"
-      host     = var.movies_container_name
-      port     = 9091
+      upstream  = "transmission_movies"
+      path      = "/"
+      host      = var.movies_container_name
+      host_port = 9091
     }
   ]
 }
@@ -34,10 +34,10 @@ module "tv_proxy" {
 
   proxies = [
     {
-      upstream = "transmission_tv"
-      path     = "/"
-      host     = var.tv_container_name
-      port     = 9091
+      upstream  = "transmission_tv"
+      path      = "/"
+      host      = var.tv_container_name
+      host_port = 9091
     }
   ]
 }

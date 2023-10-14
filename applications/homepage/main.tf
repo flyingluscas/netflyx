@@ -44,40 +44,40 @@ module "proxy" {
 
   proxies = [
     {
-      upstream = "homepage"
-      path     = "/"
-      host     = docker_container.homepage.name
-      port     = 3000
+      upstream  = "homepage"
+      path      = "/"
+      host      = docker_container.homepage.name
+      host_port = 3000
     },
     {
-      upstream = "radarr"
-      path     = "/radarr"
-      host     = var.radarr_container_name
-      port     = 7878
+      upstream  = "radarr"
+      path      = "/radarr"
+      host      = var.radarr_container_name
+      host_port = 7878
     },
     {
-      upstream = "sonarr"
-      path     = "/sonarr"
-      host     = var.sonarr_container_name
-      port     = 8989
+      upstream  = "sonarr"
+      path      = "/sonarr"
+      host      = var.sonarr_container_name
+      host_port = 8989
     },
     {
-      upstream = "prowlarr"
-      path     = "/prowlarr"
-      host     = var.prowlarr_container_name
-      port     = 9696
+      upstream  = "prowlarr"
+      path      = "/prowlarr"
+      host      = var.prowlarr_container_name
+      host_port = 9696
     },
     {
-      upstream = "bazarr"
-      path     = "/bazarr"
-      host     = var.bazarr_container_name
-      port     = 6767
+      upstream  = "bazarr"
+      path      = "/bazarr"
+      host      = var.bazarr_container_name
+      host_port = 6767
     },
     {
-      upstream = "tautulli"
-      path     = "/tautulli"
-      host     = var.tautulli_container_name
-      port     = 8181
+      upstream  = "tautulli"
+      path      = "/tautulli"
+      host      = var.tautulli_container_name
+      host_port = 8181
     },
   ]
 }

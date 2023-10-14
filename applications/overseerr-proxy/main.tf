@@ -16,10 +16,10 @@ module "proxy" {
 
   proxies = [
     {
-      upstream = local.service
-      path     = "/"
-      host     = var.overseerr_container_name
-      port     = 5055
+      upstream  = local.service
+      path      = "/"
+      host      = var.overseerr_container_name
+      host_port = 5055
     }
   ]
 }

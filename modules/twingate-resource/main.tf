@@ -19,7 +19,7 @@ resource "twingate_resource" "resource" {
 
       tcp {
         policy = "RESTRICTED"
-        ports  = ["80"]
+        ports  = var.web_ports
       }
 
       udp {

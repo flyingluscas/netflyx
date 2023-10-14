@@ -31,6 +31,11 @@ variable "web" {
   type = bool
 }
 
+variable "web_ports" {
+  type    = list(number)
+  default = [80]
+}
+
 variable "ssh" {
   type = bool
 }

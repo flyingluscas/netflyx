@@ -20,10 +20,11 @@ variable "nginx_conf_folder" {
 
 variable "proxies" {
   type = list(object({
-    upstream = string
-    path     = string
-    host     = string
-    port     = number
+    upstream  = string
+    path      = string
+    host      = string
+    host_path = optional(string)
+    host_port = number
   }))
 }
 

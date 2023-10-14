@@ -7,7 +7,17 @@ resource "docker_image" "nginx" {
 }
 
 resource "local_file" "nginx_conf" {
-  content         = templatefile("${path.module}/nginx.conf.tftpl", { proxies = var.proxies })
+  content = templatefile("${path.module}/nginx.conf.tftpl", {
+    proxies = [
+      for proxy in var.proxies : {
+        upstream  = proxy.upstream
+        path      = proxy.path
+        host      = proxy.host
+        host_path = proxy.host_path != null ? proxy.host_path : ""
+        host_port = proxy.host_port
+      }
+    ]
+  })
   filename        = local.nginx_conf_file_path
   file_permission = "0644"
 }

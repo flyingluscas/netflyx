@@ -55,10 +55,10 @@ module "proxy" {
 
   proxies = [
     {
-      upstream = "plex"
-      path     = "/"
-      host     = docker_container.plex.name
-      port     = 32400
+      upstream  = "plex"
+      path      = "/"
+      host      = docker_container.plex.name
+      host_port = 32400
     },
   ]
 }

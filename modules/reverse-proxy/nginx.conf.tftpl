@@ -1,6 +1,6 @@
 %{ for proxy in proxies ~}
 upstream ${proxy.upstream} {
-  server ${proxy.host}:${proxy.port};
+  server ${proxy.host}:${proxy.host_port}${proxy.host_path};
   keepalive 32;
 }
 

@@ -102,3 +102,12 @@ module "arthur" {
   web               = false
   ssh               = true
 }
+
+module "webcam" {
+  source                     = "./applications/webcam"
+  docker_bridge_network_id   = module.docker_networks.bridge_network_id
+  twingate_remote_network_id = module.twingate_network.remote_network_id
+  twingate_admin_group_id    = module.twingate_admin_group.admin_group_id
+  twingate_public_group_id   = var.twingate_public_group_id
+  nginx_conf_folder          = var.nginx_conf_folder
+}
