@@ -1,5 +1,10 @@
 resource "docker_image" "plex" {
-  name = "plexinc/pms-docker"
+  name = "plex"
+
+  build {
+    context    = "${path.cwd}/pms-docker"
+    dockerfile = "Dockerfile.arm64"
+  }
 }
 
 resource "docker_container" "plex" {

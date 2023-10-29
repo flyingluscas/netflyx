@@ -1,5 +1,5 @@
 resource "docker_image" "homepage" {
-  name = "ghcr.io/benphelps/homepage"
+  name = "ghcr.io/gethomepage/homepage"
 }
 
 resource "docker_container" "homepage" {

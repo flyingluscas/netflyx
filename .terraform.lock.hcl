@@ -4,6 +4,7 @@
 provider "registry.terraform.io/hashicorp/local" {
   version = "2.4.0"
   hashes = [
+    "h1:OMqURhlP2IgLEgUCzSlaKXyb/IbnKForgDSjZF/NY4Y=",
     "h1:R97FTYETo88sT2VHfMgkPU3lzCsZLunPftjSI5vfKe8=",
     "zh:53604cd29cb92538668fe09565c739358dc53ca56f9f11312b9d7de81e48fab9",
     "zh:66a46e9c508716a1c98efbf793092f03d50049fa4a83cd6b2251e9a06aca2acf",
@@ -25,6 +26,7 @@ provider "registry.terraform.io/kreuzwerker/docker" {
   constraints = "3.0.2"
   hashes = [
     "h1:cT2ccWOtlfKYBUE60/v2/4Q6Stk1KYTNnhxSck+VPlU=",
+    "h1:tMiDR/3WQYAwE4Z7Xr1iqJN23z2GNr1ARis9yutVgjw=",
     "zh:15b0a2b2b563d8d40f62f83057d91acb02cd0096f207488d8b4298a59203d64f",
     "zh:23d919de139f7cd5ebfd2ff1b94e6d9913f0977fcfc2ca02e1573be53e269f95",
     "zh:38081b3fe317c7e9555b2aaad325ad3fa516a886d2dfa8605ae6a809c1072138",
@@ -46,6 +48,7 @@ provider "registry.terraform.io/twingate/twingate" {
   version     = "1.2.2-rc1"
   constraints = "1.2.2-rc1"
   hashes = [
+    "h1:eB5Ihe/GGqJ9Y/6XTaYdPu5Q+fmBmEcJDvwRw6XnHoM=",
     "h1:vGI79qVHBPQraMqr+d5Idn4X/RkwPIo5Qv5DpnmSrGs=",
     "zh:28c446a4d2a029a12127a4c46a383366ad62e056b38c8fa1531f2e427cccd9be",
     "zh:2a9322ca1bc954b0f4421963ebe07e7741be79b2377b1859783a34d2ac60d41d",

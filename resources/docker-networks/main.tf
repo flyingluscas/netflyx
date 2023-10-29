@@ -12,6 +12,6 @@ resource "docker_network" "macvlan" {
   }
 
   options = {
-    parent = "enp1s0"
+    parent = "end0"
   }
 }

@@ -90,24 +90,25 @@ module "plex" {
   twingate_public_group_id   = var.twingate_public_group_id
 }
 
-module "arthur" {
-  source            = "./modules/twingate-resource"
-  name              = "arthur"
-  address           = "192.168.0.151"
-  alias             = "arthur.local"
-  remote_network_id = module.twingate_network.remote_network_id
-  public_group_id   = var.twingate_public_group_id
-  admin_group_id    = module.twingate_admin_group.admin_group_id
-  admin_only        = true
-  web               = false
-  ssh               = true
-}
+#module "arthur" {
+#  source            = "./modules/twingate-resource"
+#  name              = "arthur"
+#  address           = "192.168.0.151"
+#  alias             = "arthur.local"
+#  remote_network_id = module.twingate_network.remote_network_id
+#  public_group_id   = var.twingate_public_group_id
+#  admin_group_id    = module.twingate_admin_group.admin_group_id
+#  admin_only        = true
+#  web               = false
+#  ssh               = true
+#}
 
-module "webcam" {
-  source                     = "./applications/webcam"
-  docker_bridge_network_id   = module.docker_networks.bridge_network_id
-  twingate_remote_network_id = module.twingate_network.remote_network_id
-  twingate_admin_group_id    = module.twingate_admin_group.admin_group_id
-  twingate_public_group_id   = var.twingate_public_group_id
-  nginx_conf_folder          = var.nginx_conf_folder
-}
+#module "webcam" {
+#  source                     = "./applications/webcam"
+#  docker_bridge_network_id   = module.docker_networks.bridge_network_id
+#  twingate_remote_network_id = module.twingate_network.remote_network_id
+#  twingate_admin_group_id    = module.twingate_admin_group.admin_group_id
+#  twingate_public_group_id   = var.twingate_public_group_id
+#  nginx_conf_folder          = var.nginx_conf_folder
+#}
+
