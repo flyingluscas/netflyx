@@ -40,6 +40,20 @@ services:
     ports:
       - 8989:8989
 
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr-server
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/radarr:/config
+      - ./data:/data
+    networks:
+      - netflyx
+    ports:
+      - 7878:7878
+
   transmission-tv:
     image: linuxserver/transmission
     container_name: transmission-tv-server
