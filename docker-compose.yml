@@ -1,5 +1,6 @@
 networks:
   netflyx:
+    name: netflyx
     driver: bridge
 
 services:
@@ -9,8 +10,64 @@ services:
     env_file: .env
     restart: unless-stopped
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /etc/localtime:/etc/localtime:ro
       - ./data/config/plex:/config
       - ./data/media:/data/media
     networks:
       - netflyx
+    ports:
+      - 32400:32400/tcp
+      - 3005:3005/tcp
+      - 8324:8324/tcp
+      - 32469:32469/tcp
+      - 1900:1900/udp
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr-server
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/sonarr:/config
+      - ./data:/data
+    networks:
+      - netflyx
+    ports:
+      - 8989:8989
+
+  transmission-tv:
+    image: linuxserver/transmission
+    container_name: transmission-tv-server
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/transmission-tv:/config
+      - ./data:/data
+    networks:
+      - netflyx
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+
+  transmission-movies:
+    image: linuxserver/transmission
+    container_name: transmission-movies-server
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/transmission-movies:/config
+      - ./data:/data
+    networks:
+      - netflyx
+    ports:
+      - 9092:9091
+      - 51414:51413
+      - 51414:51413/udp

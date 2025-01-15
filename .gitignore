@@ -4,3 +4,6 @@ data/config/*/*
 
 data/media/*/*
 !data/media/*/.gitkeep
+
+data/torrents/*/*
+!data/torrents/*/.gitkeep
