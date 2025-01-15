@@ -54,6 +54,20 @@ services:
     ports:
       - 7878:7878
 
+  prowlarr:
+    image: linuxserver/prowlarr
+    container_name: prowlarr-server
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/prowlarr:/config
+      - ./data:/data
+    networks:
+      - netflyx
+    ports:
+      - 9696:9696
+
   transmission-tv:
     image: linuxserver/transmission
     container_name: transmission-tv-server
