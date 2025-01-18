@@ -4,6 +4,15 @@ networks:
     driver: bridge
 
 services:
+  cloudflared:
+    image: cloudflare/cloudflared
+    container_name: cloudflared
+    command: tunnel run --token $CLOUDFLARED_TOKEN
+    env_file: .env
+    restart: unless-stopped
+    networks:
+      - netflyx
+
   plex:
     image: plexinc/pms-docker
     container_name: plex-server
