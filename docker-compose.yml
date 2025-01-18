@@ -77,6 +77,19 @@ services:
     ports:
       - 9696:9696
 
+  overseerr:
+    image: linuxserver/overseerr
+    container_name: overseerr-server
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/overseerr:/config
+    networks:
+      - netflyx
+    ports:
+      - 5055:5055
+
   transmission-tv:
     image: linuxserver/transmission
     container_name: transmission-tv-server
