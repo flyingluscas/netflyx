@@ -4,6 +4,18 @@ networks:
     driver: bridge
 
 services:
+  plex-cleaner:
+    image: nitrikx/plex-cleaner
+    container_name: plex-cleaner
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/plex-cleaner:/config
+      - ./data/media:/plexdata
+    networks:
+      - netflyx
+
   cloudflared:
     image: cloudflare/cloudflared
     container_name: cloudflared
