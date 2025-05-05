@@ -47,6 +47,30 @@ services:
       - 32413:32413/udp
       - 32414:32414/udp
 
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin
+    container_name: jellyfin-server
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/jellyfin:/config
+      - ./data/media:/data/media
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/video10:/dev/video10
+      - /dev/video11:/dev/video11
+      - /dev/video12:/dev/video12
+    networks:
+      - netflyx
+    ports:
+      - 8096:8096
+      - 8920:8920
+      - 7359:7359/udp
+      - 1900:1900/udp
+    group_add:
+      - video
+
   sonarr:
     image: linuxserver/sonarr
     container_name: sonarr-server
