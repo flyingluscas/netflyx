@@ -1,0 +1,9 @@
+.env
+data/config/*/*
+!data/config/*/.gitkeep
+
+data/media/*/*
+!data/media/*/.gitkeep
+
+data/downloads/*/*
+!data/downloads/*/.gitkeep

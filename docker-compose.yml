@@ -1,0 +1,148 @@
+networks:
+  netflyx:
+    name: netflyx
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1420
+
+services:
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr
+    container_name: flaresolverr-server
+    restart: unless-stopped
+    env_file: .env
+    network_mode: service:gluetun
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+
+  cloudflared:
+    image: cloudflare/cloudflared
+    container_name: cloudflared
+    command: tunnel run --token $CLOUDFLARED_TOKEN
+    env_file: .env
+    restart: unless-stopped
+    networks:
+      - netflyx
+
+  jellyseerr:
+    image: ghcr.io/fallenbagel/jellyseerr
+    container_name: jellyseerr-server
+    env_file: .env
+    restart: unless-stopped
+    networks:
+      - netflyx
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/jellyseerr:/app/config
+    ports:
+      - 5055:5055
+
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin
+    container_name: jellyfin-server
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - netflyx
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/jellyfin:/config
+      - ./data/media:/data/media
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/video0:/dev/video0
+      - /dev/video1:/dev/video1
+    ports:
+      - 8096:8096
+      - 8920:8920
+      - 7359:7359/udp
+      - 1900:1900/udp
+    group_add:
+      - video
+
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr-server
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/sonarr:/config
+      - ./data:/data
+    networks:
+      - netflyx
+    ports:
+      - 8989:8989
+
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr-server
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/radarr:/config
+      - ./data:/data
+    networks:
+      - netflyx
+    ports:
+      - 7878:7878
+
+  prowlarr:
+    image: linuxserver/prowlarr
+    container_name: prowlarr-server
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/prowlarr:/config
+      - ./data:/data
+    networks:
+      - netflyx
+    ports:
+      - 9696:9696
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent
+    container_name: qbittorrent-server
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data/config/qbittorrent:/config
+      - ./data:/data
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    networks:
+      - netflyx
+
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: vpn-server
+    env_file: .env
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    networks:
+      - netflyx
+    ports:
+      - 8888:8888 # TinyProxy
+      - 8191:8191 # Flare Solver
+
+  tinyproxy:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.tinyproxy
+    container_name: tinyproxy-server
+    network_mode: service:gluetun
+    restart: unless-stopped
+    depends_on:
+      - gluetun
+    volumes:
+      - ./data/config/tinyproxy:/etc/tinyproxy
