@@ -2,6 +2,13 @@ FROM alpine:3.22
 
 RUN apk add --no-cache tinyproxy
 
+# Create tinyproxy config directory
+RUN mkdir -p /etc/tinyproxy
+
+# Copy entrypoint script
+COPY docker/tinyproxy-entrypoint.sh /usr/local/bin/tinyproxy-entrypoint.sh
+RUN chmod +x /usr/local/bin/tinyproxy-entrypoint.sh
+
 EXPOSE 8888
 
-CMD ["/usr/bin/tinyproxy", "-d"]
+ENTRYPOINT ["/usr/local/bin/tinyproxy-entrypoint.sh"]

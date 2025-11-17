@@ -144,5 +144,8 @@ services:
     restart: unless-stopped
     depends_on:
       - gluetun
-    volumes:
-      - ./data/config/tinyproxy:/etc/tinyproxy
+    environment:
+      - TINYPROXY_USER=${TINYPROXY_USER:-admin}
+      - TINYPROXY_PASSWORD=${TINYPROXY_PASSWORD:-changeme}
+      - TINYPROXY_PORT=${TINYPROXY_PORT:-8888}
+      - TINYPROXY_TIMEOUT=${TINYPROXY_TIMEOUT:-600}

@@ -1,6 +1,7 @@
 .env
 data/config/*/*
 !data/config/*/.gitkeep
+!data/config/*/add-trackers.sh
 
 data/media/*/*
 !data/media/*/.gitkeep
